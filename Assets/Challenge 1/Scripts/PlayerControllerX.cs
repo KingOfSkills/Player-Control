@@ -2,19 +2,19 @@
 
 public class PlayerControllerX : MonoBehaviour
 {
-    [SerializeField] private float speed;
-    [SerializeField] private float rotationSpeed;
+    private float speed = 20f;
+    private float rotationSpeed = 100f;
     private float verticalInput;
 
     void FixedUpdate()
     {
-        // get the user's vertical input
+        // get the user's vertical and horizontal input
         verticalInput = Input.GetAxis("Vertical");
 
         // move the plane forward at a constant rate
-        transform.Translate(Vector3.forward * speed * Time.deltaTime * verticalInput);
+        transform.Translate(Vector3.forward * speed * Time.deltaTime);
 
         // tilt the plane up/down based on up/down arrow keys
-        transform.Rotate(Vector3.right * rotationSpeed * Time.deltaTime);
+        transform.Rotate(Vector3.right * rotationSpeed * Time.deltaTime * verticalInput);
     }
 }
