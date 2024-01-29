@@ -7,6 +7,7 @@ public class FollowPlayer : MonoBehaviour
 
     private void LateUpdate()
     {
+        // Follow player transform
         transform.position = player.transform.position + offset;
     }
 }
