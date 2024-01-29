@@ -9,17 +9,19 @@ public class PlayerControl : MonoBehaviour
 
     [SerializeField] private Camera thirdPersonCamera;
     [SerializeField] private Camera firstPersonCamera;
+    [SerializeField] private int inputID;
+    [SerializeField] private KeyCode switchKey;
 
     private void Update()
     {
         // Get Player Input
-        horizontalInput = Input.GetAxis("Horizontal");
-        forwardInput = Input.GetAxis("Vertical");
+        horizontalInput = Input.GetAxis("Horizontal" + inputID);
+        forwardInput = Input.GetAxis("Vertical" + inputID);
         // Move Vehicle forward
         transform.Translate(Vector3.forward * Time.deltaTime * moveSpeed * forwardInput);
         transform.Rotate(Vector3.up, Time.deltaTime * turnSpeed * horizontalInput);
-
-        if (Input.GetKeyDown(KeyCode.E))
+        // Switch Camera
+        if (Input.GetKeyDown(switchKey))
         {
             firstPersonCamera.gameObject.SetActive(!firstPersonCamera.isActiveAndEnabled);
             thirdPersonCamera.gameObject.SetActive(!thirdPersonCamera.isActiveAndEnabled);
